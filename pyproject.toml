@@ -10,7 +10,7 @@ readme = "README.md"
 packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.13"
 pyqt6 = "^6.6.1"
 yt-dlp = "2025.01.26"
 
