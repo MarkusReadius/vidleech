@@ -1,0 +1,20 @@
+0000000000000000000000000000000000000000 4ce1e7afb46f97c9181d0e1d8c6bff4ab3d9e5b7 Mark Read <mread@oliobits.com> 1738618659 -0500	commit (initial): feat: initial project setup
+4ce1e7afb46f97c9181d0e1d8c6bff4ab3d9e5b7 08f70de30eefb9d33793880ed9ab2243f76e88dc Mark Read <mread@oliobits.com> 1738619907 -0500	commit: feat: improve UI and add application icon
+08f70de30eefb9d33793880ed9ab2243f76e88dc fa611045df2584b6e92c8d88c79d2aeaa4775178 Mark Read <mread@oliobits.com> 1738620148 -0500	commit: fix: improve UI elements
+fa611045df2584b6e92c8d88c79d2aeaa4775178 f5b0aa605c9f99f3093864119e7eb0bb95202b88 Mark Read <mread@oliobits.com> 1738620337 -0500	commit: fix: improve text visibility
+f5b0aa605c9f99f3093864119e7eb0bb95202b88 d74dd787cba4275e265d28a1be51ab7fe1f324db Mark Read <mread@oliobits.com> 1738620564 -0500	commit: fix: improve UI styling
+d74dd787cba4275e265d28a1be51ab7fe1f324db 3c00d1f36e1c1016e3d3c59a7d3447e653fd2d27 Mark Read <mread@oliobits.com> 1738620698 -0500	commit: fix: improve dropdown styling
+3c00d1f36e1c1016e3d3c59a7d3447e653fd2d27 ddf22de88b86ffbef38a6ff56c31497fc8203bde Mark Read <mread@oliobits.com> 1738620937 -0500	commit: feat: add help menu with supported platforms
+ddf22de88b86ffbef38a6ff56c31497fc8203bde d5c2112abb750ab6fc2d267f418395d95cbb986f Mark Read <mread@oliobits.com> 1738620962 -0500	commit: refactor: move platforms list to help menu
+d5c2112abb750ab6fc2d267f418395d95cbb986f afb8b4d9a6658f4555f41d488623bc43c14f0aa0 Mark Read <mread@oliobits.com> 1738621300 -0500	commit: fix: improve platforms dialog readability
+afb8b4d9a6658f4555f41d488623bc43c14f0aa0 a2a49d6b7ce1777e968bf81e786a402ffcb50167 Mark Read <mread@oliobits.com> 1738622737 -0500	commit: fix: improve UI stability and progress updates
+a2a49d6b7ce1777e968bf81e786a402ffcb50167 d44d76a88063d5f52bbd4325da30d32a325907d1 Mark Read <mread@oliobits.com> 1738622925 -0500	commit: fix: improve dropdown arrow appearance
+d44d76a88063d5f52bbd4325da30d32a325907d1 824c977bf599f811bd9914b4cf1353c7870ba8e3 Mark Read <mread@oliobits.com> 1738623049 -0500	commit: fix: simplify dropdown arrow styling
+824c977bf599f811bd9914b4cf1353c7870ba8e3 01c765759cad5424ada73d7e02d156b302cfbd6e Mark Read <mread@oliobits.com> 1738623081 -0500	commit: fix: improve dropdown arrow style
+01c765759cad5424ada73d7e02d156b302cfbd6e f9c040cae19e31cb20b5ca7b4826657731c2b22d Mark Read <mread@oliobits.com> 1738623188 -0500	commit: fix: simplify dropdown styling
+f9c040cae19e31cb20b5ca7b4826657731c2b22d 66ce58a82e2ecd41e52ff7a92238faeec4b94619 Mark Read <mread@oliobits.com> 1738623314 -0500	commit: fix: improve platforms dialog styling
+66ce58a82e2ecd41e52ff7a92238faeec4b94619 6ca1a9f420bb54f09d12c3bf83912465292f60b2 Mark Read <mread@oliobits.com> 1738623482 -0500	commit: fix: improve window resizing behavior
+6ca1a9f420bb54f09d12c3bf83912465292f60b2 6e7eb56a5b5621b0fe5a25196a9668af8148527b Mark Read <mread@oliobits.com> 1738623803 -0500	commit: fix: simplify dropdown menu appearance
+6e7eb56a5b5621b0fe5a25196a9668af8148527b 4ea5659c5b622b0ee9ea68a88dd6cee1b3b62e86 Mark Read <mread@oliobits.com> 1738623929 -0500	commit: fix: improve dropdown menu styling
+4ea5659c5b622b0ee9ea68a88dd6cee1b3b62e86 70e67b6c838ad617bf034329c340114045c185df Mark Read <mread@oliobits.com> 1738624041 -0500	commit: fix: further simplify dropdown styling
+70e67b6c838ad617bf034329c340114045c185df 1fc6147e27ec7c9cbc5426909a9365477e16764b Mark Read <mread@oliobits.com> 1738624176 -0500	commit: chore: prepare repository for GitHub
