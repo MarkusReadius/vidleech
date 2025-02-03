@@ -19,23 +19,22 @@ jobs:
       with:
         python-version: "3.11"
     
-    - name: Install Poetry
-      run: |
-        (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
-    
     - name: Install dependencies
-      run: poetry install
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller pyqt6 yt-dlp
     
     - name: Build executable
       run: |
-        poetry run pyinstaller --name=vidleech --onefile --noconsole --clean --add-data "src/resources;resources" src/main.py
+        pyinstaller --name=vidleech --onefile --noconsole --clean --add-data "src/resources;resources" src/main.py
     
-    - name: Create Release
+    - name: Upload Release Asset
       uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: |
-          dist/vidleech.exe
+        files: dist/vidleech.exe
         name: Release ${{ github.ref_name }}
         body_path: CHANGELOG.md
         draft: false
         prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
