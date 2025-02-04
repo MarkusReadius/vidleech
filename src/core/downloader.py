@@ -1,135 +1,77 @@
-"""
-Video downloader implementation using yt-dlp.
-"""
-from dataclasses import dataclass
-from enum import Enum
-from pathlib import Path
-from typing import Callable, Optional
-
+import os
+import sys
+from typing import Optional, Dict, Any
+from PyQt6.QtCore import QObject, pyqtSignal
 import yt_dlp
 
-class VideoFormat(Enum):
-    """Video format options."""
-    BEST = "best"
-    HD = "best[height<=720]"
-    SD = "best[height<=480]"
-    AUDIO = "bestaudio"
+class VideoDownloader(QObject):
+    progress = pyqtSignal(float, str)
+    error = pyqtSignal(str)
+    complete = pyqtSignal()
 
-@dataclass
-class DownloadProgress:
-    """Download progress information."""
-    status: str
-    percent: float
-    speed: Optional[str] = None
-    eta: Optional[str] = None
-    filename: Optional[str] = None
+    def __init__(self):
+        super().__init__()
+        self.ydl_opts = None
+        self._setup_ffmpeg_path()
 
-class VideoDownloader:
-    """Handles video downloads using yt-dlp."""
-    
-    def __init__(
-        self,
-        progress_callback: Callable[[DownloadProgress], None],
-        download_path: Optional[Path] = None
-    ):
-        """Initialize the downloader.
+    def _setup_ffmpeg_path(self):
+        """Set up ffmpeg path to use bundled binaries."""
+        if getattr(sys, 'frozen', False):
+            # Running in a bundle
+            bundle_dir = sys._MEIPASS
+            ffmpeg_path = os.path.join(bundle_dir, 'ffmpeg.exe')
+            ffprobe_path = os.path.join(bundle_dir, 'ffprobe.exe')
+            if os.path.exists(ffmpeg_path) and os.path.exists(ffprobe_path):
+                os.environ["PATH"] = f"{bundle_dir};{os.environ['PATH']}"
+
+    def _progress_hook(self, d: Dict[str, Any]) -> None:
+        if d['status'] == 'downloading':
+            p = d.get('_percent_str', '0%').replace('%', '')
+            try:
+                percentage = float(p)
+                self.progress.emit(percentage, 'Downloading...')
+            except ValueError:
+                self.progress.emit(0, 'Starting download...')
+        elif d['status'] == 'finished':
+            self.progress.emit(100, 'Download complete!')
+
+    def download(self, url: str, output_path: str, format_selection: str = 'best') -> None:
+        """
+        Download video from URL.
         
         Args:
-            progress_callback: Function to call with download progress updates
-            download_path: Optional custom download directory
+            url: Video URL
+            output_path: Output directory
+            format_selection: Format to download ('best', 'hd', 'sd', 'audio')
         """
-        self.progress_callback = progress_callback
-        self.download_path = download_path or Path.home() / "Downloads"
-        self.download_path.mkdir(parents=True, exist_ok=True)
-        
-        # Configure yt-dlp options
+        format_opts = {
+            'best': 'best',
+            'hd': 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
+            'sd': 'bestvideo[height<=480]+bestaudio/best[height<=480]',
+            'audio': 'bestaudio/best'
+        }
+
         self.ydl_opts = {
-            'format': VideoFormat.BEST.value,
+            'format': format_opts.get(format_selection, 'best'),
+            'outtmpl': os.path.join(output_path, '%(title)s.%(ext)s'),
             'progress_hooks': [self._progress_hook],
-            'outtmpl': str(self.download_path / '%(title)s.%(ext)s'),
             'quiet': True,
             'no_warnings': True,
-            'noprogress': False,  # Enable progress updates
+            'ffmpeg_location': os.path.join(sys._MEIPASS, 'ffmpeg.exe') if getattr(sys, 'frozen', False) else None
         }
-    
-    def set_format(self, format: VideoFormat):
-        """Set the video format for downloads.
-        
-        Args:
-            format: The VideoFormat to use
-        """
-        self.ydl_opts['format'] = format.value
-    
-    def _progress_hook(self, d: dict):
-        """Handle download progress updates from yt-dlp.
-        
-        Args:
-            d: Progress information dictionary from yt-dlp
-        """
-        if d['status'] == 'downloading':
-            # Calculate progress
-            downloaded = d.get('downloaded_bytes', 0)
-            total = d.get('total_bytes', 0) or d.get('total_bytes_estimate', 0)
-            
-            if total > 0:
-                percent = (downloaded / total) * 100
-            else:
-                percent = d.get('percentage', 0)
-                
-            # Ensure percent is within bounds
-            if percent > 100:
-                percent = 100
-            elif percent < 0:
-                percent = 0
-            
-            # Create progress update
-            progress = DownloadProgress(
-                status="downloading",
-                percent=percent,
-                speed=d.get('speed_str'),
-                eta=d.get('eta_str'),
-                filename=d.get('filename')
-            )
-            
-        elif d['status'] == 'finished':
-            progress = DownloadProgress(
-                status="finished",
-                percent=100.0,
-                filename=d.get('filename')
-            )
-            
-        elif d['status'] == 'error':
-            progress = DownloadProgress(
-                status="error",
-                percent=0.0,
-                filename=d.get('filename')
-            )
-            
-        else:
-            return
-            
-        # Send progress update
-        self.progress_callback(progress)
-    
-    def download(self, url: str) -> bool:
-        """Download a video.
-        
-        Args:
-            url: The video URL to download
-            
-        Returns:
-            bool: True if download successful, False otherwise
-        """
+
         try:
             with yt_dlp.YoutubeDL(self.ydl_opts) as ydl:
                 ydl.download([url])
-            return True
-            
+            self.complete.emit()
         except Exception as e:
-            # Send error progress
-            self.progress_callback(DownloadProgress(
-                status="error",
-                percent=0.0,
-                filename=str(e)
-            ))
-            return False
+            self.error.emit(str(e))
+
+    def get_video_info(self, url: str) -> Optional[Dict[str, Any]]:
+        """Get video information without downloading."""
+        try:
+            with yt_dlp.YoutubeDL({'quiet': True}) as ydl:
+                return ydl.extract_info(url, download=False)
+        except Exception as e:
+            self.error.emit(str(e))
+            return None
