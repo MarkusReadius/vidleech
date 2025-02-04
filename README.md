@@ -15,8 +15,8 @@ A modern GUI video downloader powered by yt-dlp.
 - 📊 Real-time download progress tracking
 - 🔧 Format selection (Best, HD, SD, Audio)
 - 📁 Custom download directory
-- ⚡ No external dependencies required
-- 🚀 Standalone Windows executable
+- ⚡ No external dependencies required (ffmpeg included)
+- 🚀 Single-file Windows executable
 
 ## Installation
 
