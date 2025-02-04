@@ -50,6 +50,7 @@ poetry.lock
 .coverage
 .pytest_cache/
 htmlcov/
+.tox/
 
 # Logs
 *.log
@@ -57,3 +58,16 @@ htmlcov/
 # OS-specific
 .DS_Store
 Thumbs.db
+
+# Local development
+*.local
+*.env
+*.env.*
+!.env.example
+
+# Build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.pyd
