@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QPalette, QColor
-from ..core.downloader import VideoDownloader
+from src.core.downloader import VideoDownloader
 
 class MainWindow(QMainWindow):
     def __init__(self):
