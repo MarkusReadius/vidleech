@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vidleech"
-version = "0.1.0"
+version = "0.1.2"
 description = "A modern GUI video downloader powered by yt-dlp"
 authors = ["Read <read@example.com>"]
 license = "MIT"

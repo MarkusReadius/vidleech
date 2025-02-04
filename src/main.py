@@ -21,7 +21,7 @@ def main():
     """Main application entry point"""
     app = QApplication(sys.argv)
     app.setApplicationName("Vidleech")
-    app.setApplicationVersion("0.1.0")
+    app.setApplicationVersion("0.1.2")
     
     # Set application style
     app.setStyle("Fusion")
