@@ -1,0 +1,7 @@
+chore: prepare repository for GitHub
+
+- Add CONTRIBUTING.md with development guidelines
+- Add GitHub Actions workflow for CI/CD
+- Add CHANGELOG.md for version tracking
+- Update project metadata in pyproject.toml
+- Ensure proper repository structure
