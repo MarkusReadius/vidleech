@@ -48,8 +48,8 @@ jobs:
 
     - name: Build executable
       run: |
-        poetry run pyinstaller --name=vidleech --onefile --noconsole --clean --add-data "src/resources;resources" --add-binary "ffmpeg.exe;." --add-binary "ffprobe.exe;." src/main.py
-    
+        poetry run pyinstaller --name=vidleech --onefile --noconsole --clean --version-file="version_info.txt" --add-data "src/resources;resources" --add-binary "ffmpeg.exe;." --add-binary "ffprobe.exe;." src/main.py
+
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:

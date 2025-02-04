@@ -13,17 +13,14 @@ VSVersionInfo(
     StringFileInfo([
       StringTable(
         u'040904B0',
-        [
-          StringStruct(u'CompanyName', u'Vidleech Contributors'),
-          StringStruct(u'FileDescription', u'Modern GUI video downloader powered by yt-dlp'),
-          StringStruct(u'FileVersion', u'0.1.0'),
-          StringStruct(u'InternalName', u'vidleech'),
-          StringStruct(u'LegalCopyright', u'Copyright (c) 2025 Vidleech Contributors'),
-          StringStruct(u'OriginalFilename', u'vidleech.exe'),
-          StringStruct(u'ProductName', u'Vidleech'),
-          StringStruct(u'ProductVersion', u'0.1.0')
-        ]
-      )
+        [StringStruct(u'CompanyName', u'Vidleech'),
+        StringStruct(u'FileDescription', u'Modern GUI video downloader'),
+        StringStruct(u'FileVersion', u'0.1.0'),
+        StringStruct(u'InternalName', u'vidleech'),
+        StringStruct(u'LegalCopyright', u'© 2025 Vidleech. All rights reserved.'),
+        StringStruct(u'OriginalFilename', u'vidleech.exe'),
+        StringStruct(u'ProductName', u'Vidleech'),
+        StringStruct(u'ProductVersion', u'0.1.0')])
     ]),
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
   ]
