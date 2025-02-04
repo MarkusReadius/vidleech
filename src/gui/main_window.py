@@ -21,12 +21,45 @@ class MainWindow(QMainWindow):
                 background-color: #2b2b2b;
                 color: #ffffff;
             }
-            QLineEdit, QComboBox {
+            QLineEdit {
                 padding: 8px;
                 border: 1px solid #3d3d3d;
                 border-radius: 4px;
                 background-color: #363636;
                 color: #ffffff;
+            }
+            QComboBox {
+                padding: 8px;
+                padding-right: 20px;
+                border: 1px solid #3d3d3d;
+                border-radius: 4px;
+                background-color: #363636;
+                color: #ffffff;
+            }
+            QComboBox::drop-down {
+                border: none;
+                width: 20px;
+                background-color: #444444;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+            QComboBox::down-arrow {
+                image: none;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid #ffffff;
+                width: 0;
+                height: 0;
+                margin-right: 8px;
+            }
+            QComboBox::drop-down:hover {
+                background-color: #505050;
+            }
+            QComboBox QAbstractItemView {
+                background-color: #363636;
+                border: 1px solid #3d3d3d;
+                selection-background-color: #505050;
+                selection-color: white;
             }
             QPushButton {
                 padding: 8px 16px;
