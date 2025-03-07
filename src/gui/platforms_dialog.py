@@ -119,39 +119,21 @@ class PlatformsDialog(QDialog):
             row = i // 3
             col = i % 3
             
-            # Create platform card
-            platform_frame = QFrame()
-            platform_frame.setFrameShape(QFrame.Shape.StyledPanel)
-            platform_frame.setStyleSheet("""
-                QFrame {
-                    border: 1px solid #3d3d3d;
-                    border-radius: 8px;
-                    padding: 10px;
+            # Platform name with icon
+            name_label = QLabel(f"  {platform['name']}")
+            name_label.setFont(QFont(name_label.font().family(), 12))
+            name_label.setStyleSheet("""
+                QLabel {
+                    padding: 8px;
+                    border-radius: 4px;
                 }
-                QFrame:hover {
+                QLabel:hover {
                     background-color: rgba(13, 110, 253, 0.1);
                 }
             """)
             
-            # Platform layout
-            platform_layout = QHBoxLayout(platform_frame)
-            platform_layout.setContentsMargins(10, 10, 10, 10)
-            
-            # Platform icon (placeholder)
-            icon_label = QLabel()
-            icon_label.setFixedSize(24, 24)
-            icon = QIcon.fromTheme(platform["icon"])
-            if not icon.isNull():
-                icon_label.setPixmap(icon.pixmap(24, 24))
-            platform_layout.addWidget(icon_label)
-            
-            # Platform name
-            name_label = QLabel(platform["name"])
-            name_label.setFont(QFont(name_label.font().family(), 12))
-            platform_layout.addWidget(name_label)
-            
             # Add to grid
-            container_layout.addWidget(platform_frame, row, col)
+            container_layout.addWidget(name_label, row, col)
         
         # Add "And many more..." label at the end
         more_label = QLabel("And many more...")

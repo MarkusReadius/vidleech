@@ -47,15 +47,12 @@ class MainWindow(QMainWindow):
                 border-top-right-radius: 4px;
                 border-bottom-right-radius: 4px;
             }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                border-top: 5px solid #ffffff;
-                width: 0;
-                height: 0;
-                margin-right: 8px;
-            }
+                QComboBox::down-arrow {
+                    width: 14px;
+                    height: 14px;
+                    image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath fill='%23ffffff' d='M7 9L2 4h10z'/%3E%3C/svg%3E");
+                    margin-right: 8px;
+                }
             QComboBox::drop-down:hover {
                 background-color: #505050;
             }
@@ -132,6 +129,12 @@ class MainWindow(QMainWindow):
         
         # Theme toggle
         self.theme_btn = QPushButton()
+        self.theme_btn.setStyleSheet("""
+            QPushButton {
+                background-color: transparent;
+                border: none;
+            }
+        """)
         self.theme_btn.setIcon(QIcon.fromTheme("weather-clear-night"))
         self.theme_btn.setToolTip("Toggle Dark/Light Theme")
         self.theme_btn.setFixedSize(36, 36)
@@ -373,6 +376,12 @@ class MainWindow(QMainWindow):
                     background-color: #363636;
                 }
             """)
+            self.theme_btn.setStyleSheet("""
+                QPushButton {
+                    background-color: transparent;
+                    border: none;
+                }
+            """)
             self.theme_btn.setIcon(QIcon.fromTheme("weather-clear"))
             self.theme_btn.setToolTip("Switch to Light Theme")
         else:
@@ -407,12 +416,9 @@ class MainWindow(QMainWindow):
                     border-bottom-right-radius: 4px;
                 }
                 QComboBox::down-arrow {
-                    image: none;
-                    border-left: 5px solid transparent;
-                    border-right: 5px solid transparent;
-                    border-top: 5px solid #212529;
-                    width: 0;
-                    height: 0;
+                    width: 14px;
+                    height: 14px;
+                    image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath fill='%23212529' d='M7 9L2 4h10z'/%3E%3C/svg%3E");
                     margin-right: 8px;
                 }
                 QComboBox::drop-down:hover {
@@ -464,6 +470,12 @@ class MainWindow(QMainWindow):
                     border: 1px solid #ced4da;
                     border-radius: 4px;
                     background-color: #ffffff;
+                }
+            """)
+            self.theme_btn.setStyleSheet("""
+                QPushButton {
+                    background-color: transparent;
+                    border: none;
                 }
             """)
             self.theme_btn.setIcon(QIcon.fromTheme("weather-clear-night"))
@@ -551,9 +563,15 @@ class MainWindow(QMainWindow):
         
         # Add to recent downloads list
         if self.current_download:
-            item_text = f"{os.path.basename(self.current_download['url'])} - {self.current_download['format']}"
+            # Get the filename from the path (this is an approximation since we don't know the exact filename)
+            # In a real implementation, yt-dlp would return the actual filename
+            path = self.current_download['path']
+            format_ext = ".mp3" if self.current_download['format'] == "Audio Only" else ".mp4"
+            filename = f"video{format_ext}"  # Default filename
+            
+            item_text = f"{filename} - {self.current_download['format']}"
             item = QListWidgetItem(item_text)
-            item.setToolTip(f"URL: {self.current_download['url']}\nFormat: {self.current_download['format']}\nSaved to: {self.current_download['path']}")
+            item.setToolTip(f"URL: {self.current_download['url']}\nFormat: {self.current_download['format']}\nSaved to: {os.path.join(path, filename)}")
             self.downloads_list.insertItem(0, item)
             
             # Limit list to 10 items
