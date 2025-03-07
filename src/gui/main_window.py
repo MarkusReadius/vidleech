@@ -4,10 +4,10 @@ from PyQt6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
     QLineEdit, QPushButton, QProgressBar, QComboBox,
     QLabel, QFileDialog, QMessageBox, QFrame, QSizePolicy,
-    QListWidget, QListWidgetItem, QToolButton, QMenu, QAction
+    QListWidget, QListWidgetItem, QToolButton, QMenu
 )
 from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QIcon, QPalette, QColor, QFont, QPixmap
+from PyQt6.QtGui import QIcon, QPalette, QColor, QFont, QPixmap, QAction
 from src.core.downloader import VideoDownloader
 from src.gui.platforms_dialog import PlatformsDialog
 
