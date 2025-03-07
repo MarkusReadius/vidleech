@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-03-07
+
+### Changed
+- Updated yt-dlp from 2025.01.26 to 2025.2.19 for improved platform compatibility
+- Added Memory Bank documentation for better project context tracking
+
+### Fixed
+- Resolved dependency issues with PyQt6 installation
+
 ## [0.1.0] - 2025-02-03
 
 ### Added
