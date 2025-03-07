@@ -55,3 +55,24 @@ jobs:
       with:
         name: vidleech-windows
         path: dist/vidleech.exe
+        
+    - name: Get version from pyproject.toml
+      id: get_version
+      run: |
+        $version = (Get-Content pyproject.toml | Select-String -Pattern 'version = "([^"]+)"').Matches.Groups[1].Value
+        echo "version=$version" >> $env:GITHUB_OUTPUT
+        
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      if: github.ref == 'refs/heads/main'
+      with:
+        tag_name: v${{ steps.get_version.outputs.version }}
+        name: Release v${{ steps.get_version.outputs.version }}
+        body_path: CHANGELOG.md
+        draft: false
+        prerelease: false
+        files: |
+          dist/vidleech.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
