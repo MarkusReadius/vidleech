@@ -107,7 +107,7 @@ class MainWindow(QMainWindow):
         
         # Title and version
         title_layout = QVBoxLayout()
-        title_label = QLabel("Internet Required")
+        title_label = QLabel("Потребує інтернету")
         title_label.setFont(QFont(title_label.font().family(), 18, QFont.Weight.Bold))
         title_label.setStyleSheet("color: #0d6efd;")
         
