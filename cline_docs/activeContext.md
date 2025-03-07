@@ -11,6 +11,12 @@ The application is now working after resolving dependency issues. The main probl
 - Updated version to 0.1.3 in all relevant files
 - Updated GitHub Actions workflow to automatically create releases
 - Fixed GitHub Actions workflow permissions to allow release creation
+- Completely redesigned the GUI with modern features:
+  - Added dark/light theme toggle
+  - Added recent downloads history
+  - Improved layout and usability
+  - Enhanced platforms dialog
+  - Added clear and cancel buttons
 
 ## Resolved Issues
 The application was not starting due to missing dependencies. This has been resolved by installing and updating the required packages:

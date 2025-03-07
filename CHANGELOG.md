@@ -7,9 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.3] - 2025-03-07
 
+### Added
+- Modern redesigned GUI with improved layout and usability
+- Dark/light theme toggle
+- Recent downloads history section
+- Clear button for URL input
+- Cancel button for downloads (placeholder for future implementation)
+- Improved platforms dialog with grid layout
+
 ### Changed
 - Updated yt-dlp from 2025.01.26 to 2025.2.19 for improved platform compatibility
 - Added Memory Bank documentation for better project context tracking
+- Increased minimum window size for better usability
 
 ### Fixed
 - Resolved dependency issues with PyQt6 installation
