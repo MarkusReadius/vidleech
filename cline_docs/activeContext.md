@@ -22,6 +22,9 @@ The application is now working after resolving dependency issues. The main probl
   - Made theme toggle button transparent
   - Improved platforms dialog layout
   - Changed recent downloads to show filenames instead of URLs
+- Fixed recent downloads functionality:
+  - Modified downloader to return actual filenames
+  - Updated main window to display real filenames in recent downloads list
 
 ## Resolved Issues
 The application was not starting due to missing dependencies. This has been resolved by installing and updating the required packages:
