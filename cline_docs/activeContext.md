@@ -17,6 +17,11 @@ The application is now working after resolving dependency issues. The main probl
   - Improved layout and usability
   - Enhanced platforms dialog
   - Added clear and cancel buttons
+- Fixed UI issues based on user feedback:
+  - Fixed dropdown arrow appearance
+  - Made theme toggle button transparent
+  - Improved platforms dialog layout
+  - Changed recent downloads to show filenames instead of URLs
 
 ## Resolved Issues
 The application was not starting due to missing dependencies. This has been resolved by installing and updating the required packages:
