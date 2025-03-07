@@ -7,7 +7,7 @@ import yt_dlp
 class VideoDownloader(QObject):
     progress = pyqtSignal(float, str)
     error = pyqtSignal(str)
-    complete = pyqtSignal()
+    complete = pyqtSignal(str)  # Now emits the filename
 
     def __init__(self):
         super().__init__()
@@ -34,6 +34,8 @@ class VideoDownloader(QObject):
                 self.progress.emit(0, 'Starting download...')
         elif d['status'] == 'finished':
             self.progress.emit(100, 'Download complete!')
+            # Store the filename for later use
+            self.last_filename = os.path.basename(d['filename'])
 
     def download(self, url: str, output_path: str, format_selection: str = 'best') -> None:
         """
@@ -61,9 +63,26 @@ class VideoDownloader(QObject):
         }
 
         try:
+            # Initialize the filename
+            self.last_filename = ""
+            
             with yt_dlp.YoutubeDL(self.ydl_opts) as ydl:
+                # Get video info first to get the title
+                info = ydl.extract_info(url, download=False)
+                title = info.get('title', 'video')
+                ext = info.get('ext', 'mp4')
+                if format_selection == 'audio':
+                    ext = 'mp3'
+                
+                # If we couldn't get the filename from the progress hook
+                if not hasattr(self, 'last_filename') or not self.last_filename:
+                    self.last_filename = f"{title}.{ext}"
+                
+                # Download the video
                 ydl.download([url])
-            self.complete.emit()
+                
+            # Emit the complete signal with the filename
+            self.complete.emit(self.last_filename)
         except Exception as e:
             self.error.emit(str(e))
 

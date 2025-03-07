@@ -554,7 +554,7 @@ class MainWindow(QMainWindow):
         self.status_label.setText("Error")
         QMessageBox.critical(self, "Error", message)
 
-    def download_complete(self):
+    def download_complete(self, filename=""):
         """Handle download completion."""
         self.download_btn.setEnabled(True)
         self.cancel_btn.setEnabled(False)
@@ -563,15 +563,20 @@ class MainWindow(QMainWindow):
         
         # Add to recent downloads list
         if self.current_download:
-            # Get the filename from the path (this is an approximation since we don't know the exact filename)
-            # In a real implementation, yt-dlp would return the actual filename
             path = self.current_download['path']
-            format_ext = ".mp3" if self.current_download['format'] == "Audio Only" else ".mp4"
-            filename = f"video{format_ext}"  # Default filename
             
+            # Use the actual filename if provided, otherwise use a default
+            if not filename:
+                format_ext = ".mp3" if self.current_download['format'] == "Audio Only" else ".mp4"
+                filename = f"video{format_ext}"  # Default filename
+            
+            # Create full path to the file
+            full_path = os.path.join(path, filename)
+            
+            # Create list item with the actual filename
             item_text = f"{filename} - {self.current_download['format']}"
             item = QListWidgetItem(item_text)
-            item.setToolTip(f"URL: {self.current_download['url']}\nFormat: {self.current_download['format']}\nSaved to: {os.path.join(path, filename)}")
+            item.setToolTip(f"URL: {self.current_download['url']}\nFormat: {self.current_download['format']}\nSaved to: {full_path}")
             self.downloads_list.insertItem(0, item)
             
             # Limit list to 10 items
