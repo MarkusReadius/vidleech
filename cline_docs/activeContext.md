@@ -8,6 +8,8 @@ The application is now working after resolving dependency issues. The main probl
 - Upgraded yt-dlp from 2025.1.26 to 2025.2.19
 - Upgraded pip from 24.2 to 25.0.1
 - Created Memory Bank documentation to track project context
+- Updated version to 0.1.3 in all relevant files
+- Updated GitHub Actions workflow to automatically create releases
 
 ## Resolved Issues
 The application was not starting due to missing dependencies. This has been resolved by installing and updating the required packages:
@@ -25,10 +27,11 @@ python -m pip install --upgrade pip
   - yt-dlp 2025.2.19 (upgraded from 2025.1.26)
 
 ## Next Steps
-1. Consider setting up Poetry for proper dependency management
-2. Implement a dependency check on startup to prevent similar issues
-3. Consider adding the Python Scripts directory to PATH to avoid warnings
-4. Regularly update yt-dlp to maintain compatibility with video platforms
+1. Monitor GitHub Actions to ensure the release is created successfully
+2. Consider setting up Poetry for proper dependency management
+3. Implement a dependency check on startup to prevent similar issues
+4. Consider adding the Python Scripts directory to PATH to avoid warnings
+5. Regularly update yt-dlp to maintain compatibility with video platforms
 
 ## Notes
 - The application uses yt-dlp which requires regular updates to maintain compatibility with video platforms
