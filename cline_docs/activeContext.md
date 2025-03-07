@@ -10,6 +10,7 @@ The application is now working after resolving dependency issues. The main probl
 - Created Memory Bank documentation to track project context
 - Updated version to 0.1.3 in all relevant files
 - Updated GitHub Actions workflow to automatically create releases
+- Fixed GitHub Actions workflow permissions to allow release creation
 
 ## Resolved Issues
 The application was not starting due to missing dependencies. This has been resolved by installing and updating the required packages:
