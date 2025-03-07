@@ -609,4 +609,4 @@ class MainWindow(QMainWindow):
             if self.downloads_list.count() > 10:
                 self.downloads_list.takeItem(self.downloads_list.count() - 1)
         
-        QMessageBox.information(self, "Success", "Download completed successfully!")
+        # No popup message - just update the status label

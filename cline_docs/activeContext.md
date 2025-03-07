@@ -16,7 +16,7 @@ The application is now working after resolving dependency issues. The main probl
   - Added recent downloads history
   - Improved layout and usability
   - Enhanced platforms dialog
-  - Added clear and cancel buttons
+  - Added clear and cancel buttonsl
 - Fixed UI issues based on user feedback:
   - Fixed dropdown arrow appearance
   - Made theme toggle button transparent
@@ -26,6 +26,7 @@ The application is now working after resolving dependency issues. The main probl
   - Modified downloader to return actual filenames
   - Updated main window to display real filenames in recent downloads list
   - Added ability to open downloaded files by double-clicking in the recent downloads list
+  - Removed annoying popup message after download completion
 
 ## Resolved Issues
 The application was not starting due to missing dependencies. This has been resolved by installing and updating the required packages:
