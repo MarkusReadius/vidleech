@@ -25,6 +25,7 @@ The application is now working after resolving dependency issues. The main probl
 - Fixed recent downloads functionality:
   - Modified downloader to return actual filenames
   - Updated main window to display real filenames in recent downloads list
+  - Added ability to open downloaded files by double-clicking in the recent downloads list
 
 ## Resolved Issues
 The application was not starting due to missing dependencies. This has been resolved by installing and updating the required packages:

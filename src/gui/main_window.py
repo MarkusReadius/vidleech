@@ -263,6 +263,8 @@ class MainWindow(QMainWindow):
                 background-color: #0d6efd;
             }
         """)
+        # Connect double-click event to open file
+        self.downloads_list.itemDoubleClicked.connect(self.open_downloaded_file)
         content_layout.addWidget(self.downloads_list)
         
         layout.addLayout(content_layout)
@@ -554,6 +556,28 @@ class MainWindow(QMainWindow):
         self.status_label.setText("Error")
         QMessageBox.critical(self, "Error", message)
 
+    def open_downloaded_file(self, item):
+        """Open the downloaded file or its containing folder."""
+        # Extract the file path from the tooltip
+        tooltip = item.toolTip()
+        path_line = next((line for line in tooltip.split('\n') if line.startswith('Saved to:')), None)
+        
+        if path_line:
+            file_path = path_line.replace('Saved to:', '').strip()
+            
+            # Check if the file exists
+            if os.path.exists(file_path):
+                # On Windows, use the default file association to open the file
+                os.startfile(file_path)
+            else:
+                # If file doesn't exist, try to open the containing folder
+                folder_path = os.path.dirname(file_path)
+                if os.path.exists(folder_path):
+                    os.startfile(folder_path)
+                else:
+                    QMessageBox.warning(self, "File Not Found", 
+                                       f"The file or folder no longer exists:\n{file_path}")
+
     def download_complete(self, filename=""):
         """Handle download completion."""
         self.download_btn.setEnabled(True)
@@ -577,6 +601,8 @@ class MainWindow(QMainWindow):
             item_text = f"{filename} - {self.current_download['format']}"
             item = QListWidgetItem(item_text)
             item.setToolTip(f"URL: {self.current_download['url']}\nFormat: {self.current_download['format']}\nSaved to: {full_path}")
+            # Store the full path as item data for easy access
+            item.setData(Qt.ItemDataRole.UserRole, full_path)
             self.downloads_list.insertItem(0, item)
             
             # Limit list to 10 items
